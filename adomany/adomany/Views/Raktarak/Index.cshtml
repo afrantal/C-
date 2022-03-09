@@ -1,0 +1,70 @@
+﻿@model adomany.Models.Kereso
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Raktarak" asp-action="Index" method="get">
+    <div class="row">
+        <div class="col">
+            <input asp-for="NevKereso" type="text" class="form-control" placeholder="Elnevezés" aria-label="Elnevezés:">
+        </div>
+        <div class="col">
+            <select asp-for="KategoriaKereso" asp-items="Model.KategoriaLista" class="form-select" aria-label="Kategóriák">
+                <option value="" selected>Összes</option>
+            </select>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-warning">Keresés</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Aruk[0].Elnevezes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aruk[0].Kategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aruk[0].Csomagolas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aruk[0].Darab)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Aruk) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Elnevezes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Csomagolas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Darab)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
